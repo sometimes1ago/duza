@@ -8,28 +8,20 @@ if (isset($_SESSION['user'])) {
 
 if (isset($_POST['submit'])) {
 
-    $login = htmlspecialchars($_POST['login']);
-    $password = htmlspecialchars($_POST['password']);
+    $login = htmlspecialchars(trim($_POST['login']));
+    $password = htmlspecialchars(trim($_POST['password']));
 
     if (!empty($login)) {
         if (!empty($password)) {
-            $db = Database::getInstance();
-
-            $data = $db->fetch(
-                "SELECT * FROM `users` WHERE `login` = :login AND `password` = :password",
-                [
-                    'login' => $login,
-                    'password' => hash('sha256', $password)
-                ]
-            );
-
-            if (!empty($data)) {
-                $user = new User($data['id'], $data['login'], $data['password'], $data['email'], $data['role']);
-                $_SESSION['user'] = $user;
-
+            if (array_key_exists('rememberMe', $_POST)) {
+                Auth::loginWithCookies($login, $password);
                 header('Location: /player/profile/');
             } else {
-                Errors::newError('Login or password incorrect!');
+                if (Auth::login($login, $password)) {
+                    header('Location: /player/profile/');
+                } else {
+                    Errors::newError('Login or password incorrect!');
+                }
             }
         } else {
             Errors::newError('Password cannot be empty!');
@@ -108,7 +100,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="d-flex align-items-center justify-content-between flex-wrap">
                             <div class="item-text mb-28">
-                                <input type="checkbox" value="lsRememberMe" id="rememberMe">
+                                <input type="checkbox" name="rememberMe" checked id="rememberMe">
                                 <label for="accept">Remember me</label>
                             </div>
                             <!-- <div class="item-text mb-28">

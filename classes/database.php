@@ -59,7 +59,7 @@ final class Database
     return $result;
   }
 
-  public final function query(string $sql, array $params = []): void
+  public final function query(string $sql, array $params = [])
   {
     $this->pdo->prepare($sql)->execute($params);
   }
@@ -71,6 +71,6 @@ final class Database
   private function __construct()
   {
     $this->pdo = new \PDO('mysql:charset=utf8; port=3306; host=localhost; dbname=u1318127_yasha_int', 'u1318127_default', 'XE8cO!1F');
-    $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_SILENT);
+    $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
   }
 }
