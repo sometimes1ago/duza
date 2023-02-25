@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="d-flex align-items-center justify-content-between flex-wrap">
                             <div class="item-text mb-28">
-                                <input type="checkbox" name="rememberMe" checked id="rememberMe">
+                                <input type="checkbox" name="rememberMe" id="rememberMe" checked>
                                 <label for="accept">Remember me</label>
                             </div>
                             <!-- <div class="item-text mb-28">

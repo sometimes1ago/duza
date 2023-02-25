@@ -6,6 +6,11 @@ if (!isset($_SESSION['user'])) {
     header('Location: /signin/');
 }
 
+if (isset($_GET['action']) && $_GET['action'] === 'login') {
+    Cookie::setCookie('LoggedIn', '1', time() + 3600, '/', '.odospk.ru');
+    header('Location: https://login.duza-gaming.com/');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -211,7 +216,7 @@ if (!isset($_SESSION['user'])) {
                                 <img src="/assets/images/dota2.svg" alt="">
                                 <img src="/assets/images/csgo.svg" style="width: 32px;height: 27px;" alt="">
                             </div>
-                            <?php if (isset($_SESSION['user'])) : ?>
+                            <?php if (Cookie::exists('LoggedIn')) : ?>
                                 <a href="https://login.duza-gaming.com/" class="show-login-window button float-right grey tiny mt10 mr15" style="height:40px;line-height:35px;width: 90%;border: 1px solid #cef290;margin-right: 15px;" style="display: flex;position: absolute;justify-content: flex-end;top: 50%;width: 20px;transform: translateY(-51%);text-align: center;">
 
                                     <svg width="92" height="112" viewBox="0 0 61 52" xmlns="http://www.w3.org/2000/svg" style="margin-top: -14px;margin-right: 17px;">
@@ -267,8 +272,7 @@ if (!isset($_SESSION['user'])) {
 
                             <?php endif; ?>
 
-                            <div <?php if (isset($_SESSION['user'])) : ?>style="display: none;" <?php endif; ?>>
-
+                            <div <?php if (Cookie::exists('LoggedIn')) : ?>style="display: none;" <?php endif; ?>>
                                 <div class="show-login-window button float-right grey tiny mt10 mr15" style="height:40px;line-height:35px;width: 90%;border: 1px solid #ef4336;text-align: -webkit-right;" style="display: flex;position: absolute;justify-content: flex-end;top: 50%;width: 20px;transform: translateY(-51%);text-align: center;">
 
                                     <a href="/player/profile?action=login" style="    position: relative; top: -15px; left: -50px;">

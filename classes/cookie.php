@@ -28,6 +28,12 @@ final class Cookie
         setcookie($cookieName, $cookieValue, $expirationTime, $path, $domain, $secure, $httpOnly);
     }
 
+    /**
+     * Method to remove cookie from $_COOKIE array
+     * @param string $cookieName Name of cookie
+     * @param string $path Path where cookie must be removed
+     * @param string $domain Domain where cookie must be removed
+     */
     public static function removeCookie(
         string $cookieName,
         string $path,
@@ -36,10 +42,29 @@ final class Cookie
         setcookie($cookieName, '', time() - 3600, $path, $domain);
     }
 
+    /**
+     * Method to get cookie value from $_COOKIE array by its name
+     * @param string $cookieName Name of gettable cookie
+     * @return string Cookie value
+     */
     public static function getCookie(string $cookieName)
     {
         if (array_key_exists($cookieName, $_COOKIE)) {
             return $_COOKIE[$cookieName];
         }
+    }
+
+    /**
+     * Method to check if cookie exists by its name
+     * @param string $cookieName Name of checkable cookie
+     * @return bool True or false statement which depends on checking result
+     */
+    public static function exists(string $cookieName): bool
+    {
+        if (array_key_exists($cookieName, $_COOKIE)) {
+            return true;
+        }
+
+        return false;
     }
 }
