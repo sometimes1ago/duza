@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/css/vendor.css">
 <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/tor.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
 <link href="/css/modern-business.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="assets/css/simple-notify.min.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/simple-notify.min.css" />
 <script src="/assets/js/jquery.min.js"></script>
